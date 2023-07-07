@@ -11,10 +11,9 @@ public interface SupermarketService {
     List<Supermarket> listAll();
 
     //2- Add a new supermarket (create)
-    Supermarket createSupermarket(Supermarket supermarket);
-
     //3- Update a supermarket (update)
-    Supermarket updateSupermarket(Supermarket supermarket);
+    Supermarket saveSupermarket(Supermarket supermarket);
+
 
     //4- Delete a supermarket (delete)
     void deleteSupermarket(int id);

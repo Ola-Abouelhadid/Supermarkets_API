@@ -17,37 +17,79 @@ public class SupermarketServiceImpl implements SupermarketService {
     //define here all the functions that will be used in the controller
     @Override
     public List<Supermarket> listAll() {
-        return null;
+        return supermarketRepo.findAll();
     }
 
     @Override
-    public Supermarket createSupermarket(Supermarket supermarket) {
-        return null;
-    }
-
-    @Override
-    public Supermarket updateSupermarket(Supermarket supermarket) {
-        return null;
+    public Supermarket saveSupermarket(Supermarket supermarket) {
+        return supermarketRepo.save(supermarket);
     }
 
     @Override
     public void deleteSupermarket(int id) {
+        supermarketRepo.deleteById(id);
 
     }
 
     @Override
-    public Supermarket getSupermarketById(int id) {
-        return null;
+    public Supermarket getSupermarketById(int id)
+    {
+        //check if the supermarket exists
+        //if it exists, return it
+        //if it doesn't exist, throw an exception
+        if (supermarketRepo.findById(id).isPresent())
+        {
+            return supermarketRepo.findById(id).get();
+        }
+        else
+        {
+            throw new RuntimeException("Supermarket with id " + id + " doesn't exist");
+        }
+
+
     }
 
     @Override
     public Supermarket activateSupermarket(int id) {
-        return null;
+
+        if (supermarketRepo.findById(id).isPresent())
+        {
+            Supermarket supermarket = supermarketRepo.findById(id).get();
+            if (supermarket.isActive())
+            {
+                throw new RuntimeException("Supermarket with id " + id + " is already active");
+            }
+            else
+            {
+                supermarket.setActive(true);
+                return supermarketRepo.save(supermarket);
+            }
+        }
+        else
+        {
+            throw new RuntimeException("Supermarket with id " + id + " doesn't exist");
+        }
     }
 
     @Override
     public Supermarket deactivateSupermarket(int id) {
-        return null;
+        if (supermarketRepo.findById(id).isPresent())
+        {
+            Supermarket supermarket = supermarketRepo.findById(id).get();
+            if (!supermarket.isActive())
+            {
+                throw new RuntimeException("Supermarket with id " + id + " is already inactive");
+            }
+            else
+            {
+                supermarket.setActive(false);
+                return supermarketRepo.save(supermarket);
+            }
+        }
+        else
+        {
+            throw new RuntimeException("Supermarket with id " + id + " doesn't exist");
+        }
     }
 
 }
