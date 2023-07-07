@@ -8,4 +8,6 @@ public interface SupermarketRepo extends JpaRepository<Supermarket, Integer> {
     //JpaRepository has all the methods we need
     //such as findAll(), findById(), save(), deleteById()
     //which will be used for the crud operations
+
+
 }

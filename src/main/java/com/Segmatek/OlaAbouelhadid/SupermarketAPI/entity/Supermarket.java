@@ -25,16 +25,20 @@ public class Supermarket {
     @Column(name="image")
     private String image;
 
+    @Column(name="active")
+    private boolean active;
+
 //    define constructors
     public Supermarket() {
 
     }
 
-    public Supermarket(String arabicName, String englishName, String address, String image) {
+    public Supermarket(String arabicName, String englishName, String address, String image, boolean active) {
         this.arabicName = arabicName;
         this.englishName = englishName;
         this.address = address;
         this.image = image;
+        this.active = active;
     }
 
 //    define getter/setter
@@ -79,8 +83,15 @@ public class Supermarket {
         this.image = image;
     }
 
+    public boolean isActive() {
+        return active;
+    }
 
-//    define toString
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    //    define toString
+
 
     @Override
     public String toString() {
@@ -90,6 +101,7 @@ public class Supermarket {
                 ", englishName='" + englishName + '\'' +
                 ", address='" + address + '\'' +
                 ", image='" + image + '\'' +
+                ", active=" + active +
                 '}';
     }
 }
