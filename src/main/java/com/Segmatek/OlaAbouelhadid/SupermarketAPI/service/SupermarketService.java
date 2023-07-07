@@ -5,18 +5,20 @@ import com.Segmatek.OlaAbouelhadid.SupermarketAPI.entity.Supermarket;
 import java.util.List;
 
 public interface SupermarketService {
+    record CustomMessage(String message) {}
     //define here all the functions that will be used in the controller
 
     //1- List supermarkets (read)
     List<Supermarket> listAll();
 
     //2- Add a new supermarket (create)
-    //3- Update a supermarket (update)
     Supermarket saveSupermarket(Supermarket supermarket);
 
+    //3- Update a supermarket (update)
+    Supermarket updateSupermarket(int id, Supermarket supermarket);
 
     //4- Delete a supermarket (delete)
-    void deleteSupermarket(int id);
+    CustomMessage deleteSupermarket(int id);
 
     //5- Get a supermarket by id
     Supermarket getSupermarketById(int id);
