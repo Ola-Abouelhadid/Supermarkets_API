@@ -2,6 +2,7 @@ package com.Segmatek.OlaAbouelhadid.SupermarketAPI.rest;
 
 import com.Segmatek.OlaAbouelhadid.SupermarketAPI.entity.Supermarket;
 import com.Segmatek.OlaAbouelhadid.SupermarketAPI.service.SupermarketService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class SupermarketController {
     private SupermarketService supermarketService;
 
     //inject the supermarket service using constructor injection
+    @Autowired
     public SupermarketController(SupermarketService supermarketService) {
         this.supermarketService = supermarketService;
     }

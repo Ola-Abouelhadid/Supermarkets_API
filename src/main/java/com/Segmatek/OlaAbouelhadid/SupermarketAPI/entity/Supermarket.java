@@ -1,5 +1,6 @@
 package com.Segmatek.OlaAbouelhadid.SupermarketAPI.entity;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 
 // Annotation to tell Hibernate that this is a class that maps to a database table
@@ -13,12 +14,13 @@ public class Supermarket {
     @Column(name="id")
     private int id;
 
+
+
     @Column(name="arabic_name")
     private String arabicName;
 
     @Column(name="english_name")
     private String englishName;
-
     @Column(name="address")
     private String address;
 
