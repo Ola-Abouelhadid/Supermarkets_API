@@ -55,13 +55,13 @@ public class SupermarketController {
 
     //5- Activate a supermarket
     @PutMapping("/supermarkets/activate/{id}")
-    public Supermarket activateSupermarket(@PathVariable int id) {
+    public SupermarketService.CustomMessage activateSupermarket(@PathVariable int id) {
         return supermarketService.activateSupermarket(id);
     }
 
     //6- Deactivate a supermarket
     @PutMapping("/supermarkets/deactivate/{id}")
-    public Supermarket deactivateSupermarket(@PathVariable int id) {
+    public SupermarketService.CustomMessage deactivateSupermarket(@PathVariable int id) {
         return supermarketService.deactivateSupermarket(id);
     }
 

@@ -2,6 +2,7 @@ package com.Segmatek.OlaAbouelhadid.SupermarketAPI.service;
 
 import com.Segmatek.OlaAbouelhadid.SupermarketAPI.dao.SupermarketRepo;
 import com.Segmatek.OlaAbouelhadid.SupermarketAPI.entity.Supermarket;
+import com.Segmatek.OlaAbouelhadid.SupermarketAPI.exception.SupermarketNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class SupermarketServiceImpl implements SupermarketService {
         }
         else
         {
-            throw new RuntimeException("Supermarket with id " + id + " doesn't exist");
+            throw new SupermarketNotFoundException("Supermarket with id " + id + " doesn't exist");
         }
     }
 
@@ -68,14 +69,14 @@ public class SupermarketServiceImpl implements SupermarketService {
         }
         else
         {
-            throw new RuntimeException("Supermarket with id " + id + " doesn't exist");
+            throw new SupermarketNotFoundException("Supermarket with id " + id + " doesn't exist");
         }
 
 
     }
 
     @Override
-    public Supermarket activateSupermarket(int id) {
+    public CustomMessage activateSupermarket(int id) {
 
         if (supermarketRepo.findById(id).isPresent())
         {
@@ -87,17 +88,18 @@ public class SupermarketServiceImpl implements SupermarketService {
             else
             {
                 supermarket.setActive(true);
-                return supermarketRepo.save(supermarket);
+                supermarketRepo.save(supermarket);
+                return new CustomMessage("Supermarket with id " + id + " was activated successfully");
             }
         }
         else
         {
-            throw new RuntimeException("Supermarket with id " + id + " doesn't exist");
+            throw new SupermarketNotFoundException("Supermarket with id " + id + " doesn't exist");
         }
     }
 
     @Override
-    public Supermarket deactivateSupermarket(int id) {
+    public CustomMessage deactivateSupermarket(int id) {
         if (supermarketRepo.findById(id).isPresent())
         {
             Supermarket supermarket = supermarketRepo.findById(id).get();
@@ -108,12 +110,13 @@ public class SupermarketServiceImpl implements SupermarketService {
             else
             {
                 supermarket.setActive(false);
-                return supermarketRepo.save(supermarket);
+                supermarketRepo.save(supermarket);
+                return new CustomMessage("Supermarket with id " + id + " was deactivated successfully");
             }
         }
         else
         {
-            throw new RuntimeException("Supermarket with id " + id + " doesn't exist");
+            throw new SupermarketNotFoundException("Supermarket with id " + id + " doesn't exist");
         }
     }
 

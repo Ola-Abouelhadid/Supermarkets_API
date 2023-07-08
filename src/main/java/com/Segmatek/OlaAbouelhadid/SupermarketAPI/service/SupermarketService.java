@@ -24,8 +24,8 @@ public interface SupermarketService {
     Supermarket getSupermarketById(int id);
 
     //6- activate a supermarket
-    Supermarket activateSupermarket(int id);
+    CustomMessage activateSupermarket(int id);
 
     //7- deactivate a supermarket
-    Supermarket deactivateSupermarket(int id);
+    CustomMessage deactivateSupermarket(int id);
 }
