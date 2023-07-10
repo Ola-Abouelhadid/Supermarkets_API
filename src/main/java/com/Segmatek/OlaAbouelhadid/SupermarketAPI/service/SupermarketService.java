@@ -1,6 +1,8 @@
 package com.Segmatek.OlaAbouelhadid.SupermarketAPI.service;
 
 import com.Segmatek.OlaAbouelhadid.SupermarketAPI.entity.Supermarket;
+import com.Segmatek.OlaAbouelhadid.SupermarketAPI.mappers.dtos.SupermarketDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -9,7 +11,7 @@ public interface SupermarketService {
     //define here all the functions that will be used in the controller
 
     //1- List supermarkets (read)
-    List<Supermarket> listAll();
+    ResponseEntity<List<SupermarketDto>> listAll();
 
     //2- Add a new supermarket (create)
     Supermarket saveSupermarket(Supermarket supermarket);

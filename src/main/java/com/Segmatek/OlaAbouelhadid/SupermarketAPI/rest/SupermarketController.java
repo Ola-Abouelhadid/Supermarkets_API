@@ -1,8 +1,10 @@
 package com.Segmatek.OlaAbouelhadid.SupermarketAPI.rest;
 
 import com.Segmatek.OlaAbouelhadid.SupermarketAPI.entity.Supermarket;
+import com.Segmatek.OlaAbouelhadid.SupermarketAPI.mappers.dtos.SupermarketDto;
 import com.Segmatek.OlaAbouelhadid.SupermarketAPI.service.SupermarketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public class SupermarketController {
 
     // 1- List all supermarkets
     @GetMapping("/supermarkets")
-    public List<Supermarket> listAll() {
+    public ResponseEntity<List<SupermarketDto>> listAll() {
         return supermarketService.listAll();
     }
 

@@ -3,7 +3,11 @@ package com.Segmatek.OlaAbouelhadid.SupermarketAPI.service;
 import com.Segmatek.OlaAbouelhadid.SupermarketAPI.dao.SupermarketRepo;
 import com.Segmatek.OlaAbouelhadid.SupermarketAPI.entity.Supermarket;
 import com.Segmatek.OlaAbouelhadid.SupermarketAPI.exception.SupermarketNotFoundException;
+import com.Segmatek.OlaAbouelhadid.SupermarketAPI.mappers.dtos.SupermarketDto;
+import com.Segmatek.OlaAbouelhadid.SupermarketAPI.mappers.mapstruct.MapStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,15 +16,20 @@ import java.util.List;
 public class SupermarketServiceImpl implements SupermarketService {
     //inject the SupermarketRepo here
     private SupermarketRepo supermarketRepo;
+    private MapStructMapper mapstructMapper;
 
     @Autowired
-    public SupermarketServiceImpl(SupermarketRepo supermarketRepo) {
+    public SupermarketServiceImpl(SupermarketRepo supermarketRepo, MapStructMapper mapstructMapper) {
         this.supermarketRepo = supermarketRepo;
+        this.mapstructMapper = mapstructMapper;
     }
     //define here all the functions that will be used in the controller
     @Override
-    public List<Supermarket> listAll() {
-        return supermarketRepo.findAll();
+//    public List<Supermarket> listAll() {
+//        return supermarketRepo.findAll();
+//    }
+    public ResponseEntity<List<SupermarketDto>> listAll() {
+        return new ResponseEntity<>(mapstructMapper.supermarketToSupermarketDto(supermarketRepo.findAll()), HttpStatus.OK);
     }
 
     @Override
