@@ -14,16 +14,16 @@ public interface SupermarketService {
     ResponseEntity<List<SupermarketDto>> listAll();
 
     //2- Add a new supermarket (create)
-    Supermarket saveSupermarket(Supermarket supermarket);
+    SupermarketDto saveSupermarket(SupermarketDto supermarket);
 
     //3- Update a supermarket (update)
-    Supermarket updateSupermarket(int id, Supermarket supermarket);
+    SupermarketDto updateSupermarket(int id, SupermarketDto supermarket);
 
     //4- Delete a supermarket (delete)
     CustomMessage deleteSupermarket(int id);
 
     //5- Get a supermarket by id
-    Supermarket getSupermarketById(int id);
+    SupermarketDto getSupermarketById(int id);
 
     //6- activate a supermarket
     CustomMessage activateSupermarket(int id);

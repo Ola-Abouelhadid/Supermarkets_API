@@ -6,7 +6,15 @@ import java.util.List;
 @Mapper(
         componentModel = "spring")
 public interface MapStructMapper {
-    List<SupermarketDto> supermarketToSupermarketDto(
-            List<Supermarket> supermarket
+    //mapstruct will automatically generate the implementation of this method
+
+    //this method is for mapping the entity supermarket to the dto
+    SupermarketDto supermarketToSupermarketDto(
+            Supermarket supermarket
+    );
+
+    //this method is for mapping the dto to the entity supermarket
+    Supermarket supermarketDtoToSupermarket(
+            SupermarketDto supermarketDto
     );
 }

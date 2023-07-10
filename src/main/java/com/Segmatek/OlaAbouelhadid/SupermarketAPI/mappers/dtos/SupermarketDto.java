@@ -8,7 +8,9 @@ import lombok.Setter;
 @Setter
 public class SupermarketDto {
 
-//I will add all the fields here except the id and the image to test mapping
+    @JsonProperty("id")
+    private int id;
+
     @JsonProperty("arabicName")
     private String arabicName;
 
@@ -17,6 +19,9 @@ public class SupermarketDto {
 
     @JsonProperty("address")
     private String address;
+
+    @JsonProperty("image")
+    private String image;
 
     @JsonProperty("active")
     private String active;

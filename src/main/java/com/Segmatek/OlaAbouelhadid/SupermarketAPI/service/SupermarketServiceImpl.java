@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,18 +30,27 @@ public class SupermarketServiceImpl implements SupermarketService {
 //        return supermarketRepo.findAll();
 //    }
     public ResponseEntity<List<SupermarketDto>> listAll() {
-        return new ResponseEntity<>(mapstructMapper.supermarketToSupermarketDto(supermarketRepo.findAll()), HttpStatus.OK);
+        //create an empty list of SupermarketDto
+        List<SupermarketDto> supermarketDtoList = new ArrayList<>();
+        //for each supermarket in the list, map it to a supermarketDto
+        //call the supermarketToSupermarketDto function for every supermarket in the list
+        for (Supermarket supermarket : supermarketRepo.findAll()) {
+            supermarketDtoList.add(mapstructMapper.supermarketToSupermarketDto(supermarket));
+        }
+        //return the list of supermarketDto
+        return new ResponseEntity<>(supermarketDtoList, HttpStatus.OK);
     }
 
     @Override
-    public Supermarket saveSupermarket(Supermarket supermarket) {
-        return supermarketRepo.save(supermarket);
+    public SupermarketDto saveSupermarket(SupermarketDto supermarket) {
+        return mapstructMapper.supermarketToSupermarketDto(supermarketRepo.save(mapstructMapper.supermarketDtoToSupermarket(supermarket)));
     }
 
     @Override
-    public Supermarket updateSupermarket(int id, Supermarket supermarket){
+    public SupermarketDto updateSupermarket(int id, SupermarketDto supermarket){
         if (supermarketRepo.findById(id).isPresent())
         {
+
             Supermarket existingSupermarket = supermarketRepo.findById(id).get();
             if (supermarket.getArabicName() != null)
                 existingSupermarket.setArabicName(supermarket.getArabicName());
@@ -51,7 +61,7 @@ public class SupermarketServiceImpl implements SupermarketService {
             if (supermarket.getImage() != null)
                 existingSupermarket.setImage(supermarket.getImage());
 
-            return supermarketRepo.save(existingSupermarket);
+            return mapstructMapper.supermarketToSupermarketDto(supermarketRepo.save(existingSupermarket));
         }
         else
         {
@@ -67,14 +77,14 @@ public class SupermarketServiceImpl implements SupermarketService {
     }
 
     @Override
-    public Supermarket getSupermarketById(int id)
+    public SupermarketDto getSupermarketById(int id)
     {
         //check if the supermarket exists
         //if it exists, return it
         //if it doesn't exist, throw an exception
         if (supermarketRepo.findById(id).isPresent())
         {
-            return supermarketRepo.findById(id).get();
+            return mapstructMapper.supermarketToSupermarketDto(supermarketRepo.findById(id).get());
         }
         else
         {

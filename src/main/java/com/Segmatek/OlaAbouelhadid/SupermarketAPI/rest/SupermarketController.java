@@ -34,7 +34,7 @@ public class SupermarketController {
 
     // 2- Add a new supermarket
     @PostMapping("/supermarkets")
-    public Supermarket createSupermarket(@RequestBody Supermarket supermarket) {
+    public SupermarketDto createSupermarket(@RequestBody SupermarketDto supermarket) {
         //this line will make sure that the id is set to 0
         //so that the save function will create a new supermarket instead of updating an existing one
         supermarket.setId(0);
@@ -42,7 +42,7 @@ public class SupermarketController {
     }
     // 3- Update a supermarket
     @PutMapping("/supermarkets/{id}")
-    public Supermarket updateSupermarket(@PathVariable int id,@RequestBody Supermarket supermarket) {
+    public SupermarketDto updateSupermarket(@PathVariable int id,@RequestBody SupermarketDto supermarket) {
         return supermarketService.updateSupermarket(id, supermarket);
     }
 
