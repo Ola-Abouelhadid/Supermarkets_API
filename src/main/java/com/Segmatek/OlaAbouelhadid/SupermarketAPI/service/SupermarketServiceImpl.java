@@ -32,11 +32,15 @@ public class SupermarketServiceImpl implements SupermarketService {
     public ResponseEntity<List<SupermarketDto>> listAll() {
         //create an empty list of SupermarketDto
         List<SupermarketDto> supermarketDtoList = new ArrayList<>();
-        //for each supermarket in the list, map it to a supermarketDto
-        //call the supermarketToSupermarketDto function for every supermarket in the list
-        for (Supermarket supermarket : supermarketRepo.findAll()) {
-            supermarketDtoList.add(mapstructMapper.supermarketToSupermarketDto(supermarket));
-        }
+        List<Supermarket> supermarketList = supermarketRepo.findAll();
+
+        //return only the active supermarkets
+        //with java stream
+        supermarketList.stream().filter(Supermarket::isActive).forEach(supermarket -> supermarketDtoList.add(mapstructMapper.supermarketToSupermarketDto(supermarket)));
+//        for (Supermarket supermarket : supermarketRepo.findAll()) {
+//
+//            supermarketDtoList.add(mapstructMapper.supermarketToSupermarketDto(supermarket));
+//        }
         //return the list of supermarketDto
         return new ResponseEntity<>(supermarketDtoList, HttpStatus.OK);
     }
